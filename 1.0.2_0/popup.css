@@ -1,0 +1,194 @@
+body {
+    width: 420px;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 12px;
+    background: #fff;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.container {
+    padding: 12px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+h2 {
+    margin: 0 0 12px 0;
+    font-size: 16px;
+    color: #ff6699;
+    text-align: center;
+}
+
+.toolbar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.btn {
+    flex: 1;
+    padding: 6px 0;
+    font-size: 12px;
+    border: none;
+    border-radius: 4px;
+    background: #f0f0f0;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn:hover {
+    background: #e0e0e0;
+}
+
+.btn:active {
+    background: #d0d0d0;
+}
+
+.table-container {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #eee;
+    border-radius: 4px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+    word-break: break-word;
+}
+
+th {
+    background-color: #fafafa;
+    font-weight: bold;
+    font-size: 11px;
+    color: #555;
+}
+
+/* Key 列固定宽度 */
+td:nth-child(1) {
+    width: 100px;
+    font-weight: bold;
+}
+
+/* Value 列：不换行，超出省略 */
+td:nth-child(2) {
+    max-width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 操作按钮：固定宽度，防止“已复制”撑开 */
+.copy-btn {
+    width: 60px;
+    padding: 2px 0;
+    font-size: 11px;
+    background: #00a1d6;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.copy-btn:hover {
+    background: #008bbf;
+}
+
+.copy-btn.copied {
+    background: #4caf50;
+}
+
+/* 帮助按钮 - 右上角圆形问号 */
+.help-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #ff6699;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    user-select: none;
+}
+
+/* 帮助遮罩层 */
+.help-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 20;
+}
+
+.help-overlay.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 帮助内容框 */
+.help-content {
+    background: white;
+    padding: 16px;
+    border-radius: 8px;
+    max-width: 360px;
+    width: 90%;
+    font-size: 12px;
+    line-height: 1.5;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.help-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.help-header h3 {
+    margin: 0;
+    font-size: 14px;
+    color: #ff6699;
+}
+
+.close-btn {
+    font-size: 20px;
+    cursor: pointer;
+    color: #999;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+
+.help-content ul {
+    padding-left: 20px;
+    margin: 8px 0;
+}
+
+.help-content code {
+    background: #f0f0f0;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-family: monospace;
+}

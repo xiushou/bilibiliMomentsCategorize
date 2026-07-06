@@ -1,0 +1,24 @@
+[
+  {
+    "description": "treehash per file",
+    "signed_content": {
+      "payload": "eyJpdGVtX2lkIjoibHBwb21vcGNqYWpiYXBkZmNocHBuZWlvaWVqa2xoYmgiLCJpdGVtX3ZlcnNpb24iOiIxLjAuMiIsInByb3RvY29sX3ZlcnNpb24iOjEsImNvbnRlbnRfaGFzaGVzIjpbeyJmb3JtYXQiOiJ0cmVlaGFzaCIsImRpZ2VzdCI6InNoYTI1NiIsImJsb2NrX3NpemUiOjQwOTYsImhhc2hfYmxvY2tfc2l6ZSI6NDA5NiwiZmlsZXMiOlt7InBhdGgiOiJpY29uL2ljb24xMjgucG5nIiwicm9vdF9oYXNoIjoiaGEtVGJBUlVuR19TbXBDeEZuWldkSmV2WVltcGd6TmM5RDlTVUdSYm9vZyJ9LHsicGF0aCI6Imljb24vaWNvbjE2LnBuZyIsInJvb3RfaGFzaCI6IjZPZ1ZEeDNlbzhJZHBuNGZpOTVHZDh4YmcyNUF6aUdRVWZMREE2ejVZZjgifSx7InBhdGgiOiJpY29uL2ljb240OC5wbmciLCJyb290X2hhc2giOiJ4N0tDdGNXNWM4MlNoeDJpczNKdnlCNGVqM29UYkVrUGNfc3FzX1FJMURzIn0seyJwYXRoIjoibWFuaWZlc3QuanNvbiIsInJvb3RfaGFzaCI6ImhUbElBdEVBVkJ3ODVmaE9YTHdhZ20zbGN2Q1lnVHZucWJ0V29wZDJrQkEifSx7InBhdGgiOiJwb3B1cC5jc3MiLCJyb290X2hhc2giOiJVZHFINnZtVFBrdXhHcW03NHZ1Sm5uRE9XWEJxc25fRWxVSHhyeWdvTFBZIn0seyJwYXRoIjoicG9wdXAuaHRtbCIsInJvb3RfaGFzaCI6Ik1QcU12YllndFlROUhaRjN0MGJnbTR2Y0g2M29vQXUyYkVDWkNNSzVJSUUifSx7InBhdGgiOiJwb3B1cC5qcyIsInJvb3RfaGFzaCI6Ik4wX25laDkwOElyUHJ0bk5lUXRQZS1oU2JELTE1alFGNGpFZ1B0bXZVSDgifV19XX0",
+      "signatures": [
+        {
+          "header": {
+            "kid": "publisher"
+          },
+          "protected": "eyJhbGciOiJSUzI1NiJ9",
+          "signature": "SrKhONb63L7eF5nsB5F3wDT8YsUopL6TA5GoeCY1IbNBfP8NGM9c_wFNOSs817Bh57WWDug1rMjDqRgKz_QVAPd30WryuVixyzZ2k2h2fzRV-4jt5IpF3EkxdbTLc9pKyVhusdJu3d21pIJYmwz6khP7ZZ9VYC4ivCnhjNupn423rsqI9Z7LLs5O2vmTgAFpS2afsqA9ec1x4Rj_02FCBRF2xOD6zS-K2SpLr2SQiln_D4DIegH6Ny8mg2iZ_UQ5QmtDsTQEvjSCLpNpCGg8xgvJYLq3DBi7n59jFE_OT4klwzRYgVGNmjxPLHhY_ncJp7RiFuzwSuX3pU1wOQL12g"
+        },
+        {
+          "header": {
+            "kid": "webstore"
+          },
+          "protected": "eyJhbGciOiJSUzI1NiJ9",
+          "signature": "Xrwy6TShdr5ZxC3F8841quMlDIgR1W1xvQZ67SdEsehOXHNtZVkTOCkToQIBTqxPIU9sf2w--tVK5E4K3n036O4zAwYC_ajbQKWn61Z3xztMCsgBUHa3UvfsE0aY0yfmuy99xSo4wla0MK2rx1QiJmjKFqQRYNjQQ4-O-kSWjOlcpRZCa0uaH9HdMNDYKm4X5gINIL-YGYDjj4AejG5PhCESGbmGRmsm5za9CnwKy3kDaVlq-uI6sKoFRCmQx3k4CkOyhOVpgyVLYnS-nnue-__j7sGZkxHU4_D1l3g6aTsCr6s2cxwBSfmN_fs-0fjhLFBTOKRl306hdgH0CSBGhg"
+        }
+      ]
+    }
+  }
+]

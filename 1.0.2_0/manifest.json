@@ -1,0 +1,19 @@
+{
+   "action": {
+      "default_popup": "popup.html",
+      "default_title": "查看 Bilibili Cookie"
+   },
+   "description": "查看 Bilibili 开发必要的 Cookie",
+   "host_permissions": [ "https://*.bilibili.com/*", "http://*.bilibili.com/*" ],
+   "icons": {
+      "128": "icon/icon128.png",
+      "16": "icon/icon16.png",
+      "48": "icon/icon48.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArIK0721g5ji4rb/2iHZYUUUAl54rXzvdoS31BfZJVTD/lqbA/0niv081WaHpQIstV2iK9+IPpFyKPvne5e5SIpINqKlJFlkfZ6wI9IuqGO+xss/9HzzDvHPvpVnOh1Z1X1q/2i6qDB37KStzwQedsz9Um3w0NJRWHL1TzMHg0lfm3SaMCr4SEfiDXSBXRruGl7yYTVSdHgNFTDR9caWXw0WuoMgZZBR5XBJKD0fTLuF+aOZJKmZn0590mlRTTR+Waw+kZDyYbZ2Knvj5rY0T1SaUP2Vjox9px2g8oCpd5y+eHozJ1XZ6Ym4liVh7zJpWKexBlSN1c/YJ4s24dc1WywIDAQAB",
+   "manifest_version": 3,
+   "name": "Bilibili Cookie 查看器",
+   "permissions": [ "cookies" ],
+   "update_url": "https://edge.microsoft.com/extensionwebstorebase/v1/crx",
+   "version": "1.0.2"
+}

@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Cookie Demo",
+  "version": "1.0",
+
+  "permissions": ["cookies", "webRequest", "webRequestBlocking"],
+
+  "host_permissions": ["https://*.bilibili.com/*", "http://*.bilibili.com/*"],
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["https://www.bilibili.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ],
+
+  "web_accessible_resources": [
+    {
+      "resources": ["page.html", "page.js", "style.css"],
+      "matches": ["https://www.bilibili.com/*"]
+    }
+  ]
+}

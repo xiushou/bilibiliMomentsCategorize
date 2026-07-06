@@ -1,0 +1,15 @@
+body {
+  font-family: sans-serif;
+
+  background: #fafafa;
+
+  padding: 40px;
+}
+
+#cookie {
+  margin-top: 30px;
+
+  color: red;
+
+  word-break: break-all;
+}

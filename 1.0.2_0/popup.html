@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>Bilibili Cookie 查看器</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+<!-- 帮助按钮（右上角） -->
+<div class="help-btn" id="help-btn">?</div>
+
+<!-- 帮助面板（默认隐藏） -->
+<div class="help-overlay" id="help-overlay">
+    <div class="help-content">
+        <div class="help-header">
+            <h3>使用说明</h3>
+            <span class="close-btn" id="close-help">&times;</span>
+        </div>
+        <p>本插件用于提取Bilibili网站的登录Cookie，以便于开发学习使用。</p>
+        <p style="color: red;font-weight: bold">通过Cookie可以进行几乎所有的操作，故请勿将Cookie公开发布在任何地方或发送给任何人，否则将有盗号等巨大风险。</p>
+        <p>本插件完全使用浏览器api从本地获取，若字段显示“未获取到”，请先登录 Bilibili 后点击刷新。</p>
+        <p>“复制全部”以 <code>key=value; key=value</code> 格式复制；<br>“复制JSON”仅将主要字段生成结构化 JSON。</p>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Bilibili Cookie</h2>
+
+    <!-- 顶部按钮：纯文字 -->
+    <div class="toolbar">
+        <button id="refresh-btn" class="btn">🔄 刷新</button>
+        <button id="copy-all-btn" class="btn">📋 复制全部</button>
+        <button id="copy-json-btn" class="btn">📋 复制JSON</button>
+    </div>
+
+    <div id="table-container" class="table-container">
+        <table id="cookie-table">
+            <thead>
+            <tr>
+                <th>Key</th>
+                <th>Value</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+        </table>
+    </div>
+</div>
+<script src="popup.js"></script>
+</body>
+</html>
+

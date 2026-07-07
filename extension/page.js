@@ -21,4 +21,6 @@ async function getBilibiliDynamic() {
 (async () => {
   const res = await getBilibiliDynamic();
   console.log("返回数据：", JSON.stringify(res, null, 10));
+
+  document.getElementById("cookie").textContent = JSON.stringify(res, null, 10);
 })();

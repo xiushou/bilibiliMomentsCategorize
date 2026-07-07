@@ -13,7 +13,7 @@
 
   "content_scripts": [
     {
-      "matches": ["https://www.bilibili.com/*"],
+      "matches": ["https://t.bilibili.com/*"],
       "js": ["content.js"],
       "run_at": "document_start"
     }
@@ -22,7 +22,7 @@
   "web_accessible_resources": [
     {
       "resources": ["page.html", "page.js", "style.css"],
-      "matches": ["https://www.bilibili.com/*"]
+      "matches": ["https://t.bilibili.com/*"]
     }
   ]
 }

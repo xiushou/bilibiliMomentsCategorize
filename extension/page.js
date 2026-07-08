@@ -21,37 +21,74 @@ function json_str(data) {
   return JSON.stringify(data, null, 10);
 }
 
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function renderItem(item) {
+  const listEl = document.getElementById("list");
+  if (!listEl) return;
+
+  const link = item?.modules?.module_dynamic?.major?.archive?.bvid || "";
+  const title =
+    item?.modules?.module_dynamic?.major?.archive?.title || "无标题";
+  const upName = item?.modules?.module_author?.name || "未知UP主";
+  const avatar = item?.modules?.module_author?.face || "";
+  const pubTime = item?.modules?.module_author?.pub_time || "";
+  const type = item?.modules?.module_dynamic?.major?.type || "";
+
+  console.log("========");
+  console.log("渲染动态", { link, title, upName, avatar, pubTime, type });
+
+  const itemEl = document.createElement("div");
+  itemEl.className = "item-card";
+
+  if (type === "MAJOR_TYPE_ARCHIVE") {
+    const videoUrl = link ? `https://www.bilibili.com/video/${link}` : "#";
+    const avatarHtml = avatar
+      ? `<img class="avatar" src="${escapeHtml(avatar)}" alt="${escapeHtml(upName)}" />`
+      : "";
+    const parsedTime = Number(pubTime);
+    const pubTimeText = Number.isFinite(parsedTime)
+      ? new Date(parsedTime * 1000).toLocaleString()
+      : pubTime || "未知时间";
+
+    itemEl.innerHTML = `
+      <div class="item-header">
+        ${avatarHtml}
+        <div>
+          <div class="up-name">${escapeHtml(upName)}</div>
+          <div class="pub-time">${escapeHtml(pubTimeText)}</div>
+        </div>
+      </div>
+      <a class="item-title" href="${escapeHtml(videoUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(title)}</a>
+    `;
+  } else {
+    itemEl.innerHTML = `<div class="unsupported">暂不支持类型: ${escapeHtml(type || "未知")}</div>`;
+  }
+
+  listEl.appendChild(itemEl);
+}
+
 // 调用
 (async () => {
   const res = await getBilibiliDynamic();
-  // console.log("返回数据：", json_str(res));
-
   const items = res?.data?.items || [];
-  // console.log("items: ", json_str(items));
+  const listEl = document.getElementById("list");
 
-  for (const item of items) {
-    console.log("================================");
-    const link = item?.modules?.module_dynamic?.major?.archive?.bvid || "";
-    const title = item?.modules?.module_dynamic?.major?.archive?.title || "";
-    const up_name = item?.modules?.module_author?.name || "";
-    const avater = item?.modules?.module_author?.face || "";
-    const pub_time = item?.modules?.module_author?.pub_time || "";
-    const type = item?.modules?.module_dynamic?.major?.type || "";
-
-    console.log("link: ", link);
-    console.log("title: ", title);
-    console.log("up_name: ", up_name);
-    console.log("avater: ", avater);
-    console.log("pub_time: ", pub_time);
-    console.log("type: ", type);
-
-    switch (type) {
-      case "AUTHOR_TYPE_NORMAL":
-        break;
-      default:
-        break;
-    }
+  if (listEl) {
+    listEl.innerHTML = "";
   }
 
-  document.getElementById("cookie").textContent = json_str(res);
+  items.forEach(renderItem);
+
+  // const cookieEl = document.getElementById("cookie");
+  // if (cookieEl) {
+  //   cookieEl.textContent = json_str(res);
+  // }
 })();

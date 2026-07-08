@@ -6,10 +6,61 @@ body {
   padding: 40px;
 }
 
+#list {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.item-card {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.item-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.up-name {
+  font-weight: bold;
+}
+
+.pub-time {
+  font-size: 12px;
+  color: #999;
+}
+
+.item-title {
+  color: #00a1d6;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.item-title:hover {
+  text-decoration: underline;
+}
+
+.unsupported {
+  color: #999;
+}
+
 #cookie {
-  margin-top: 30px;
-
-  color: red;
-
+  margin-top: 20px;
+  color: #666;
+  white-space: pre-wrap;
   word-break: break-all;
 }

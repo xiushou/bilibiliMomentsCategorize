@@ -23,7 +23,7 @@
 
   "web_accessible_resources": [
     {
-      "resources": ["page.html", "page.js", "style.css"],
+      "resources": ["page.html", "page.js", "global.js", "style.css"],
       "matches": ["https://t.bilibili.com/*"]
     }
   ]

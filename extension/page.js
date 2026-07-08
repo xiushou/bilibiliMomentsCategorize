@@ -1,4 +1,8 @@
-const extensionId = document.body.dataset.extensionId;
+// import { getExtensionId, setExtensionId, getOptionsLink } from "./global.js";
+
+// const extensionId = document.body.dataset.extensionId;
+// setExtensionId(extensionId);
+// console.log("get extensionId from content.js:", getExtensionId());
 
 async function getBilibiliDynamic(currentOffset = offset) {
   try {

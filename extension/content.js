@@ -12,12 +12,23 @@ async function replacePage() {
   link.href = chrome.runtime.getURL("style.css");
   document.head.appendChild(link);
 
-  const script = document.createElement("script");
-  script.src = chrome.runtime.getURL("page.js");
-  document.body.appendChild(script);
+  const pageScript = document.createElement("script");
+  pageScript.type = "module";
+  pageScript.src = chrome.runtime.getURL("page.js");
+  document.body.appendChild(pageScript);
 
-  const extensionId = chrome.runtime.id;
-  document.body.dataset.extensionId = extensionId;
+  // const extensionId = chrome.runtime.id;
+  // document.body.dataset.extensionId = extensionId;
+
+  const settingsButton = document.getElementById("settingsButton");
+  console.log("settingsButton: ", settingsButton);
+  settingsButton.addEventListener("click", () => {
+    chrome.runtime.sendMessage({
+      action: "openOptions",
+    });
+  });
 }
+
+console.log("init content.js");
 
 replacePage();

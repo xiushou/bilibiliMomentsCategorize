@@ -21,7 +21,7 @@ async function replacePage() {
   // document.body.dataset.extensionId = extensionId;
 
   const settingsButton = document.getElementById("settingsButton");
-  console.log("settingsButton: ", settingsButton);
+  // console.log("settingsButton: ", settingsButton);
   settingsButton.addEventListener("click", () => {
     chrome.runtime.sendMessage({
       action: "openOptions",
@@ -29,6 +29,6 @@ async function replacePage() {
   });
 }
 
-console.log("init content.js");
+// console.log("init content.js");
 
 replacePage();

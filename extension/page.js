@@ -1,12 +1,28 @@
-async function getBilibiliDynamic() {
+async function getBilibiliDynamic(currentOffset = offset) {
   try {
-    const res = await fetch(
-      'https://api.bilibili.com/x/polymer/web-dynamic/v1/feed/all?timezone_offset=-480&type=all&platform=web&x-bili-device-req-json={"platform":"web","device":"pc"}',
-      {
-        method: "GET",
-        credentials: "include",
-      },
+    const url = new URL(
+      "https://api.bilibili.com/x/polymer/web-dynamic/v1/feed/all",
     );
+    url.searchParams.set("timezone_offset", "-480");
+    url.searchParams.set("type", "all");
+    url.searchParams.set("platform", "web");
+    url.searchParams.set(
+      "x-bili-device-req-json",
+      JSON.stringify({ platform: "web", device: "pc" }),
+    );
+
+    if (
+      currentOffset !== null &&
+      currentOffset !== undefined &&
+      currentOffset !== ""
+    ) {
+      url.searchParams.set("offset", String(currentOffset));
+    }
+
+    const res = await fetch(url.toString(), {
+      method: "GET",
+      credentials: "include",
+    });
 
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
@@ -34,6 +50,8 @@ function escapeHtml(value) {
 }
 
 let offset = null;
+let isLoading = false;
+let hasMore = true;
 
 function renderItem(item) {
   const listEl = document.getElementById("list");
@@ -89,11 +107,47 @@ function renderItem(item) {
   listEl.appendChild(itemEl);
 }
 
-// 调用
+async function loadMoreDynamic() {
+  if (isLoading || !hasMore) return;
+
+  isLoading = true;
+  const res = await getBilibiliDynamic(offset);
+
+  if (!res?.data) {
+    hasMore = false;
+    isLoading = false;
+    return;
+  }
+
+  offset = res.data.offset;
+  const items = res.data.items || [];
+
+  if (items.length > 0) {
+    items.forEach(renderItem);
+  }
+
+  if (offset === null || offset === undefined || offset === "") {
+    hasMore = false;
+  }
+
+  isLoading = false;
+}
+
+function handleScroll() {
+  const nearBottom =
+    window.innerHeight + window.scrollY >=
+    document.documentElement.scrollHeight - 200;
+
+  if (nearBottom) {
+    loadMoreDynamic();
+  }
+}
+
 (async () => {
-  const res = await getBilibiliDynamic();
+  const res = await getBilibiliDynamic(offset);
 
   offset = res?.data?.offset;
+  hasMore = offset !== null && offset !== undefined && offset !== "";
 
   const items = res?.data?.items || [];
   const listEl = document.getElementById("list");
@@ -104,8 +158,5 @@ function renderItem(item) {
 
   items.forEach(renderItem);
 
-  // const cookieEl = document.getElementById("cookie");
-  // if (cookieEl) {
-  //   cookieEl.textContent = json_str(res);
-  // }
+  window.addEventListener("scroll", handleScroll, { passive: true });
 })();

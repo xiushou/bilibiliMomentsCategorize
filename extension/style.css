@@ -1,24 +1,30 @@
 body {
-  font-family: sans-serif;
-
-  background: #fafafa;
-
-  padding: 40px;
+  font-family: "Microsoft YaHei", Arial, sans-serif;
+  background: #f4f5f7;
+  color: #212121;
+  padding: 24px;
+  margin: 0;
 }
 
 #list {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
+  max-width: 900px;
 }
 
 .item-card {
   background: #fff;
-  border: 1px solid #e5e5e5;
-  border-radius: 8px;
-  padding: 16px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e6eb;
+  border-radius: 10px;
+  padding: 14px 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s ease;
+}
+
+.item-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .item-header {
@@ -29,33 +35,41 @@ body {
 }
 
 .avatar {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   object-fit: cover;
+  border: 1px solid #ececec;
 }
 
 .up-name {
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 14px;
+  color: #18191c;
 }
 
 .pub-time {
   font-size: 12px;
-  color: #999;
+  color: #99a2aa;
+  margin-top: 2px;
 }
 
 .item-title {
-  color: #00a1d6;
+  display: inline-block;
+  color: #18191c;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 15px;
+  line-height: 1.5;
+  font-weight: 500;
 }
 
 .item-title:hover {
-  text-decoration: underline;
+  color: #00aeec;
 }
 
 .unsupported {
   color: #999;
+  font-size: 14px;
 }
 
 #cookie {
@@ -63,4 +77,9 @@ body {
   color: #666;
   white-space: pre-wrap;
   word-break: break-all;
+  font-size: 12px;
+  background: #fff;
+  border: 1px solid #e5e6eb;
+  border-radius: 8px;
+  padding: 12px;
 }

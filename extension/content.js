@@ -27,6 +27,13 @@ async function replacePage() {
       action: "openOptions",
     });
   });
+
+  const bilibili_up_group_name = await chrome.storage.local.get(
+    "bilibili_up_group_name",
+  );
+  document.body.dataset.upGroupName =
+    bilibili_up_group_name["bilibili_up_group_name"] || "";
+  console.log("bilibili_up_group_name: ", bilibili_up_group_name);
 }
 
 // console.log("init content.js");

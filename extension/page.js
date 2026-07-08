@@ -4,6 +4,8 @@
 // setExtensionId(extensionId);
 // console.log("get extensionId from content.js:", getExtensionId());
 
+console.log("upName from content.js:", document.body.dataset.upGroupName);
+
 async function getBilibiliDynamic(currentOffset = offset) {
   try {
     const url = new URL(

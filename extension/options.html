@@ -4,6 +4,50 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>设置</title>
+    <link rel="stylesheet" href="options.css" />
   </head>
-  <body></body>
+  <body>
+    <div class="settings-container">
+      <!-- 左侧导航栏 -->
+      <div class="settings-sidebar">
+        <div class="settings-header">
+          <h1 class="settings-title">设置</h1>
+        </div>
+        <div class="settings-categories">
+          <div class="category-item" data-category="up-group">
+            <span class="category-icon">👤</span>
+            <span class="category-name">up分组</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右侧内容区域 -->
+      <div class="settings-content">
+        <!-- up分组设置 -->
+        <div
+          class="category-content"
+          id="up-group-content"
+          style="display: block"
+        >
+          <div class="content-header">
+            <h2>up分组</h2>
+          </div>
+          <div class="settings-group">
+            <div class="setting-item">
+              <label for="upGroupInput" class="setting-label">分组名称</label>
+              <p class="setting-description">设置您的up主分组名称</p>
+              <input
+                type="text"
+                id="upGroupInput"
+                class="setting-input"
+                placeholder="输入分组名称"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="options.js"></script>
+  </body>
 </html>

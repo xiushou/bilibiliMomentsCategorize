@@ -15,6 +15,9 @@ async function replacePage() {
   const script = document.createElement("script");
   script.src = chrome.runtime.getURL("page.js");
   document.body.appendChild(script);
+
+  const extensionId = chrome.runtime.id;
+  document.body.dataset.extensionId = extensionId;
 }
 
 replacePage();

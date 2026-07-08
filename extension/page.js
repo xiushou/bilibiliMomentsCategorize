@@ -1,3 +1,5 @@
+const extensionId = document.body.dataset.extensionId;
+
 async function getBilibiliDynamic(currentOffset = offset) {
   try {
     const url = new URL(
@@ -27,7 +29,7 @@ async function getBilibiliDynamic(currentOffset = offset) {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
 
-    console.log(json_str(data));
+    // console.log(json_str(data));
 
     return data;
   } catch (e) {
@@ -66,8 +68,8 @@ function renderItem(item) {
   const type = item?.modules?.module_dynamic?.major?.type || "";
   const cover = item?.modules?.module_dynamic?.major?.archive?.cover || "";
 
-  console.log("========");
-  console.log("渲染动态", { link, title, upName, avatar, pubTime, type });
+  // console.log("========");
+  // console.log("渲染动态", { link, title, upName, avatar, pubTime, type });
 
   const itemEl = document.createElement("div");
   itemEl.className = "item-card";

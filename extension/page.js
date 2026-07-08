@@ -17,10 +17,41 @@ async function getBilibiliDynamic() {
   }
 }
 
+function json_str(data) {
+  return JSON.stringify(data, null, 10);
+}
+
 // 调用
 (async () => {
   const res = await getBilibiliDynamic();
-  console.log("返回数据：", JSON.stringify(res, null, 10));
+  // console.log("返回数据：", json_str(res));
 
-  document.getElementById("cookie").textContent = JSON.stringify(res, null, 10);
+  const items = res?.data?.items || [];
+  // console.log("items: ", json_str(items));
+
+  for (const item of items) {
+    console.log("================================");
+    const link = item?.modules?.module_dynamic?.major?.archive?.bvid || "";
+    const title = item?.modules?.module_dynamic?.major?.archive?.title || "";
+    const up_name = item?.modules?.module_author?.name || "";
+    const avater = item?.modules?.module_author?.face || "";
+    const pub_time = item?.modules?.module_author?.pub_time || "";
+    const type = item?.modules?.module_dynamic?.major?.type || "";
+
+    console.log("link: ", link);
+    console.log("title: ", title);
+    console.log("up_name: ", up_name);
+    console.log("avater: ", avater);
+    console.log("pub_time: ", pub_time);
+    console.log("type: ", type);
+
+    switch (type) {
+      case "AUTHOR_TYPE_NORMAL":
+        break;
+      default:
+        break;
+    }
+  }
+
+  document.getElementById("cookie").textContent = json_str(res);
 })();

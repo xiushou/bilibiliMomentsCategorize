@@ -1,3 +1,12 @@
 TODO:
-  - 把console.log该删删掉
-  - 把监测页面换成动态
+
+- 把console.log该删删掉
+- 修改动态内容链接参数看看效果
+- modules.module_dynamic.major.type 需要注意,有普通视频,有说说,可以参考木木与兰寿,礻困
+
+modules.module_dynamic.major.archive.bvid: 跳转链接
+modules.module_dynamic.major.archive.title: 标题
+modules.module_author.name: up名称
+modules.module_author.avater: 可以去注意一下,应该是css
+modules.module_author.face: up头像
+modules.module_author.pub_time: 发布时间:比如"5小时前"

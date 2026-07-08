@@ -10,3 +10,5 @@ modules.module_author.name: up名称
 modules.module_author.avater: 可以去注意一下,应该是css
 modules.module_author.face: up头像
 modules.module_author.pub_time: 发布时间:比如"5小时前"
+
+https://api.bilibili.com/x/polymer/web-dynamic/v1/feed/all?timezone_offset=-480&type=all&platform=web&offset=1214599979474092040&x-bili-device-req-json={"platform":"web","device":"pc"}

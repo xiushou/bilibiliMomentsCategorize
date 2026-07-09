@@ -44,6 +44,49 @@ async function getBilibiliDynamic(currentOffset = offset) {
   }
 }
 
+async function getCategory() {
+  const res = await fetch(
+    "https://api.bilibili.com/x/relation/tags?only_master=false",
+    {
+      headers: {},
+      body: null,
+      method: "GET",
+      credentials: "include",
+    },
+  );
+
+  // console.log(JSON.stringify(await res.json(), null, 10));
+
+  return (await res.json())?.data;
+}
+
+async function getUserInfo() {
+  const res = await fetch("https://api.bilibili.com/x/web-interface/nav", {
+    headers: {},
+    method: "GET",
+    credentials: "include",
+  });
+
+  // console.log(JSON.stringify(await res.json(), null, 10));
+  return (await res.json())?.data;
+}
+
+async function getUpInTag(mid, tagId) {
+  const url = new URL(`https://api.bilibili.com/x/relation/tag`);
+  url.searchParams.set("mid", mid);
+  url.searchParams.set("tagid", tagId);
+  url.searchParams.set("pn", "1");
+  url.searchParams.set("ps", Number.MAX_SAFE_INTEGER.toString());
+
+  const res = await fetch(url.toString(), {
+    headers: {},
+    method: "GET",
+    credentials: "include",
+  });
+
+  return (await res.json())?.data;
+}
+
 function json_str(data) {
   return JSON.stringify(data, null, 10);
 }
@@ -56,7 +99,7 @@ function escapeHtml(value) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 }
-
+// TODO: 避免全局变量
 let offset = null;
 let isLoading = false;
 let hasMore = true;
@@ -152,6 +195,12 @@ function handleScroll() {
 }
 
 (async () => {
+  const userInfo = await getUserInfo();
+  const mid = userInfo?.mid || "";
+  console.log("当前登录用户mid:", mid);
+
+  const categroy = await getCategory();
+
   const res = await getBilibiliDynamic(offset);
 
   offset = res?.data?.offset;

@@ -108,6 +108,53 @@ body {
   margin-bottom: 16px;
 }
 
+.tag-bar-wrapper {
+  max-width: 900px;
+  margin-bottom: 16px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+}
+
+.tag-bar-wrapper::-webkit-scrollbar {
+  height: 6px;
+}
+
+.tag-bar-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: 999px;
+}
+
+.tag-bar {
+  display: flex;
+  gap: 8px;
+  min-width: max-content;
+  padding: 2px 0;
+}
+
+.tag-chip {
+  border: 1px solid #d9d9d9;
+  background: #fff;
+  color: #333;
+  border-radius: 999px;
+  padding: 8px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.tag-chip:hover {
+  border-color: #007aff;
+  color: #007aff;
+}
+
+.tag-chip.is-selected {
+  background: #007aff;
+  color: #fff;
+  border-color: #007aff;
+  box-shadow: 0 2px 8px rgba(0, 122, 255, 0.2);
+}
+
 .settings-button {
   background: #007aff;
   color: #fff;
@@ -116,7 +163,9 @@ body {
   padding: 8px 14px;
   cursor: pointer;
   font-size: 14px;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
 
 .settings-button:hover {

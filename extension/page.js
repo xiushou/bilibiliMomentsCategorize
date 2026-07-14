@@ -194,12 +194,52 @@ function handleScroll() {
   }
 }
 
+let currentSelectedTagId = null;
+
+function renderTagBar(categories = []) {
+  const tagBarEl = document.getElementById("tagBar");
+  if (!tagBarEl) return;
+
+  tagBarEl.innerHTML = "";
+
+  if (!Array.isArray(categories) || categories.length === 0) {
+    return;
+  }
+
+  const firstTagId = categories[0]?.tagid ?? null;
+  if (currentSelectedTagId === null && firstTagId !== null) {
+    currentSelectedTagId = firstTagId;
+  }
+
+  categories.forEach((tag) => {
+    const chipEl = document.createElement("button");
+    chipEl.type = "button";
+    chipEl.className = "tag-chip";
+    chipEl.textContent = tag?.name || "未命名";
+
+    if (String(tag?.tagid ?? "") === String(currentSelectedTagId ?? "")) {
+      chipEl.classList.add("is-selected");
+    }
+
+    chipEl.addEventListener("click", () => {
+      currentSelectedTagId = tag?.tagid ?? null;
+      tagBarEl.querySelectorAll(".tag-chip").forEach((el) => {
+        el.classList.toggle("is-selected", el === chipEl);
+      });
+      console.log("当前选中的分组:", currentSelectedTagId);
+    });
+
+    tagBarEl.appendChild(chipEl);
+  });
+}
+
 (async () => {
   const userInfo = await getUserInfo();
   const mid = userInfo?.mid || "";
   console.log("当前登录用户mid:", mid);
 
-  const categroy = await getCategory();
+  const categories = await getCategory();
+  renderTagBar(categories);
 
   const res = await getBilibiliDynamic(offset);
 

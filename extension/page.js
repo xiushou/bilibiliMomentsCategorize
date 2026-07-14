@@ -160,28 +160,65 @@ function renderItem(item) {
 
 async function loadMoreDynamic() {
   if (isLoading || !hasMore) return;
-
   isLoading = true;
-  const res = await getBilibiliDynamic(offset);
 
-  if (!res?.data) {
-    hasMore = false;
-    isLoading = false;
-    return;
+  let count = 0;
+  while (true) {
+    count++;
+    if (count > 50) {
+      console.error("连续10次未获取到动态, 停止加载");
+      isLoading = false;
+      // 如果还有更多但连续未获取到，尝试在短延时后再次检查
+      return;
+    }
+    const res = await getBilibiliDynamic(offset);
+
+    if (!res?.data) {
+      hasMore = false;
+      isLoading = false;
+
+      console.error("获取动态失败, res.data为空:", res);
+      return;
+    }
+
+    offset = res.data.offset;
+    const items =
+      res.data.items.filter((item) =>
+        currentSelectedUpIds.includes(item?.modules?.module_author?.mid),
+      ) || [];
+
+    if (items.length > 0) {
+      items.forEach(renderItem);
+      if (offset === null || offset === undefined || offset === "") {
+        hasMore = false;
+      }
+
+      isLoading = false;
+      // 如果页面高度仍未填满视口，继续加载更多（防止短页面无法触发滚动）
+      if (ensureFillViewport()) {
+        return;
+      }
+    }
+  }
+}
+
+// 如果页面内容高度小于视口（或接近底部），且还有更多内容，则继续加载，直到填满或无更多
+function ensureFillViewport() {
+  try {
+    if (!hasMore || isLoading) return;
+    const docHeight = document.documentElement.scrollHeight;
+    const viewHeight =
+      window.innerHeight || document.documentElement.clientHeight;
+    // 使用与滚动触发相同的阈值：200px
+    if (docHeight <= viewHeight + 200) {
+      return false;
+    }
+  } catch (e) {
+    // 安全防护，避免在无 DOM 环境抛异常
+    console.warn("ensureFillViewport 检查时出错", e);
   }
 
-  offset = res.data.offset;
-  const items = res.data.items || [];
-
-  if (items.length > 0) {
-    items.forEach(renderItem);
-  }
-
-  if (offset === null || offset === undefined || offset === "") {
-    hasMore = false;
-  }
-
-  isLoading = false;
+  return true;
 }
 
 function handleScroll() {
@@ -195,6 +232,7 @@ function handleScroll() {
 }
 
 let currentSelectedTagId = null;
+let currentSelectedUpIds = [];
 
 function renderTagBar(categories = []) {
   const tagBarEl = document.getElementById("tagBar");
@@ -209,6 +247,8 @@ function renderTagBar(categories = []) {
   const firstTagId = categories[0]?.tagid ?? null;
   if (currentSelectedTagId === null && firstTagId !== null) {
     currentSelectedTagId = firstTagId;
+    changeTag();
+    offset = null;
   }
 
   categories.forEach((tag) => {
@@ -223,37 +263,52 @@ function renderTagBar(categories = []) {
 
     chipEl.addEventListener("click", () => {
       currentSelectedTagId = tag?.tagid ?? null;
+      changeTag();
+      offset = null;
+
       tagBarEl.querySelectorAll(".tag-chip").forEach((el) => {
         el.classList.toggle("is-selected", el === chipEl);
       });
       console.log("当前选中的分组:", currentSelectedTagId);
+
+      const listEl = document.getElementById("list");
+
+      if (listEl) {
+        listEl.innerHTML = "";
+      }
+
+      loadMoreDynamic();
     });
 
     tagBarEl.appendChild(chipEl);
   });
 }
 
+/* 使用的全局变量: currentSelectedTagId */
+async function changeTag() {
+  const re = await getUpInTag(mid, currentSelectedTagId);
+  console.log("getUpInTag返回结果:", re);
+  currentSelectedUpIds = re.map((up) => up.mid) || [];
+
+  console.log("当前选中的分组的UP主mid列表:", currentSelectedUpIds);
+}
+
+let mid = "";
 (async () => {
   const userInfo = await getUserInfo();
-  const mid = userInfo?.mid || "";
+  mid = userInfo?.mid || "";
   console.log("当前登录用户mid:", mid);
 
   const categories = await getCategory();
   renderTagBar(categories);
 
-  const res = await getBilibiliDynamic(offset);
-
-  offset = res?.data?.offset;
-  hasMore = offset !== null && offset !== undefined && offset !== "";
-
-  const items = res?.data?.items || [];
   const listEl = document.getElementById("list");
 
   if (listEl) {
     listEl.innerHTML = "";
   }
 
-  items.forEach(renderItem);
+  loadMoreDynamic();
 
   window.addEventListener("scroll", handleScroll, { passive: true });
 })();
